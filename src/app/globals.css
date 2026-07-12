@@ -1,27 +1,33 @@
 @import "tailwindcss";
-@import "@heroui/styles"; 
+@import "@heroui/styles";
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #070B12;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-exo2: var(--font-exo2), sans-serif;
+  --font-dmSans: var(--font-dm_sans), sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #070B12;
+    --foreground: #ffffff;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+@layer components {
+  .button--primary {
+    @apply bg-[#00D9F5] text-[#020810] font-semibold font-dmSans text-sm px-5 py-1 rounded-3xl
+  }
 }
