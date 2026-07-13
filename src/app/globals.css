@@ -27,7 +27,12 @@ body {
 
 
 @layer components {
+  .container {
+    @apply max-w-7xl px-6 mx-auto
+  }
   .button--primary {
     @apply bg-[#00D9F5] text-[#020810] font-semibold font-dmSans text-sm px-5 py-1 rounded-3xl
   }
+
+  
 }

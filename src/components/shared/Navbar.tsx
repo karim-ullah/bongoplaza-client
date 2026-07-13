@@ -1,5 +1,6 @@
 "use client";
-import { Button } from "@heroui/react";
+import { authClient } from "@/lib/auth-client";
+import { Avatar, Button } from "@heroui/react";
 import Link from "next/link";
 import { useState } from "react";
 import { FiShoppingCart, FiUser } from "react-icons/fi";
@@ -9,7 +10,10 @@ type LinkType = {
   label: string;
 };
 const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { data: session } = authClient.useSession();
+  const user = session?.user;
+  // console.log(user);
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   const links: LinkType[] = [
     { href: "/", label: "Home" },
@@ -24,7 +28,12 @@ const Navbar = () => {
     <>
       {links.map((link, index) => (
         <li key={index}>
-          <Link className="font-dmSans text-sm font-normal text-[#6B7A99]" href={link.href}>{link.label}</Link>
+          <Link
+            className="font-dmSans text-sm font-normal text-[#6B7A99]"
+            href={link.href}
+          >
+            {link.label}
+          </Link>
         </li>
       ))}
     </>
@@ -32,7 +41,7 @@ const Navbar = () => {
 
   return (
     <nav className="sticky top-0 z-40 w-full border-b border-separator bg-background/60 backdrop-blur-lg">
-      <header className="flex h-16 items-center justify-between px-6">
+      <header className="flex h-16 items-center justify-between container">
         <div className="flex items-center gap-4">
           <button
             className="md:hidden"
@@ -63,17 +72,42 @@ const Navbar = () => {
               )}
             </svg>
           </button>
-          <div><Link href={'/'} className="font-bold text-xl text-[#E8EDF8] uppercase">Bongoplaza</Link></div>
+          <div>
+            <Link
+              href={"/"}
+              className="font-bold text-xl text-[#E8EDF8] uppercase"
+            >
+              Bongoplaza
+            </Link>
+          </div>
         </div>
 
         <div>
           <ul className="hidden items-center gap-4 md:flex">{navLinks}</ul>
         </div>
         <div className="flex items-center gap-4 text-[#6B7A99]">
-          <IoIosSearch size={16}/>
-          <FiUser size={16}/>
-          <FiShoppingCart size={16} />
-          <Button>Sign In</Button>
+          <IoIosSearch className="cursor-pointer" size={16} />
+
+          {user && (
+            <Link href={"login"}>
+              <FiUser className="cursor-pointer" size={16} />
+            </Link>
+          )}
+          <FiShoppingCart className="cursor-pointer" size={16} />
+          {user ? (
+            <div className="relative">
+              <Avatar className="size-8">
+                <Avatar.Image
+                  alt="Online User"
+                  src={user?.image}
+                />
+                <Avatar.Fallback>ON</Avatar.Fallback>
+              </Avatar>
+              <span className="absolute right-0 bottom-0 size-2 rounded-full bg-green-500 ring-2 ring-background" />
+            </div>
+          ) : (
+            <Button>Sign In</Button>
+          )}
         </div>
       </header>
       {isMenuOpen && (
