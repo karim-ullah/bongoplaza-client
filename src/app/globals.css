@@ -3,7 +3,7 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #070B12;
+  --foreground: #070b12;
 }
 
 @theme inline {
@@ -15,7 +15,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #070B12;
+    --background: #070b12;
     --foreground: #ffffff;
   }
 }
@@ -25,14 +25,12 @@ body {
   color: var(--foreground);
 }
 
-
 @layer components {
   .container {
-    @apply max-w-7xl px-6 mx-auto
+    @apply max-w-7xl px-6 mx-auto;
   }
   .button--primary {
-    @apply bg-[#00D9F5] text-[#020810] font-semibold font-dmSans text-sm px-5 py-1 rounded-3xl
+    @apply bg-[#00D9F5] text-[#020810] font-semibold font-dmSans text-sm px-5 py-1 rounded-3xl;
   }
-
-  
 }
+

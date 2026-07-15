@@ -40,7 +40,7 @@ const Navbar = () => {
   );
 
   return (
-    <nav className="sticky top-0 z-40 w-full border-b border-separator bg-background/60 backdrop-blur-lg">
+    <nav className="sticky top-0 z-40 w-full border-b border-separator bg-background/70 backdrop-blur-3xl">
       <header className="flex h-16 items-center justify-between container">
         <div className="flex items-center gap-4">
           <button
@@ -86,10 +86,11 @@ const Navbar = () => {
           <ul className="hidden items-center gap-4 md:flex">{navLinks}</ul>
         </div>
         <div className="flex items-center gap-4 text-[#6B7A99]">
-          <IoIosSearch className="cursor-pointer" size={16} />
+          {/* <IoIosSearch className="cursor-pointer" size={16} /> */}
 
           {user && (
-            <Link href={"login"}>
+            <Link href={`/dashboard/${user?.role}/overview`}>
+              
               <FiUser className="cursor-pointer" size={16} />
             </Link>
           )}
@@ -106,7 +107,9 @@ const Navbar = () => {
               <span className="absolute right-0 bottom-0 size-2 rounded-full bg-green-500 ring-2 ring-background" />
             </div>
           ) : (
-            <Button>Sign In</Button>
+            <Link href={'/login'}>
+              <Button>Sign In</Button>
+            </Link>
           )}
         </div>
       </header>
