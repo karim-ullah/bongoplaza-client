@@ -1,8 +1,8 @@
-export const uploadImage = async (file) => {
+export const uploadImage = async (file : any) => {
   const formData = new FormData();
   formData.append("image", file);
 
-  const apiKey = process.env.NEXT_PUBLIC_IMGBB_API_KEY;
+  const apiKey = process.env.NEXT_PUBLIC_IMGBB_API_KEY as string;
   const response = await fetch(`https://api.imgbb.com/1/upload?key=${apiKey}`, {
     method: "POST",
     body: formData,

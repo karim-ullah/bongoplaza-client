@@ -1,9 +1,14 @@
-import { requireRole } from '@/lib/core/session/getSession';
-import React from 'react';
+import { requireRole } from "@/lib/core/session/getSession";
+import React from "react";
 
-const AdminLayout = async({children}) => {
-    await requireRole('admin')
-    return children
+interface AdminLayoutProps {
+  children: React.ReactNode;
+}
+
+const AdminLayout = async ({ children }: AdminLayoutProps) => {
+  await requireRole("admin");
+
+  return <>{children}</>;
 };
 
 export default AdminLayout;

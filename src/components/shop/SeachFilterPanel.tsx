@@ -4,9 +4,9 @@ import { useRouter,  } from "next/navigation";
 import React, { useState } from "react";
 
 const SearchFilterPanel = () => {
-  const [search, setSearch] = useState("");
-  const [category, setCategory] = useState("");
-  const [sortBy, setSortBy] = useState("")
+  const [search, setSearch] = useState<string>("");
+  const [category, setCategory] = useState<string>("");
+  const [sortBy, setSortBy] = useState<string>("")
 
   const router = useRouter()
 
@@ -37,7 +37,7 @@ const SearchFilterPanel = () => {
         </SearchField.Group>
       </SearchField>
 
-      <Select className="max-w-[256px]" placeholder="Filter by" aria-label="category" value={category} onChange={(value)=>setCategory(value)}>
+      <Select className="max-w-[256px]" placeholder="Filter by" aria-label="category" value={category} onChange={(value)=>setCategory(value as any)}>
         <Select.Trigger className={'bg-accent/10'}>
           <Select.Value />
           <Select.Indicator />
@@ -66,7 +66,7 @@ const SearchFilterPanel = () => {
       </Select>
 
 
-      <Select className="max-w-[256px]" placeholder="Sort by" aria-label="sortBy" value={sortBy} onChange={(value)=>setSortBy(value)}>
+      <Select className="max-w-[256px]" placeholder="Sort by" aria-label="sortBy" value={sortBy} onChange={(value)=>setSortBy(value as any)}>
         <Select.Trigger className={'bg-accent/10'}>
           <Select.Value />
           <Select.Indicator />

@@ -4,10 +4,10 @@ import React, { useState } from 'react';
 import { BiCheck, BiHeart, BiMinus, BiPlus } from 'react-icons/bi';
 import { FiShoppingCart } from 'react-icons/fi';
 
-const QuantityAction = ({product}) => {
+const QuantityAction = ({product}: {product: any}) => {
     const [qty, setQty] = useState<number>(0)
-    const [added, setAdded] = useState(false)
-    const [inWishlist, setInWishList] = useState(false)
+    const [added, setAdded] = useState<boolean>(false)
+    const [inWishlist, setInWishList] = useState<boolean>(false)
     const addToCart = ()=>{
         
     }

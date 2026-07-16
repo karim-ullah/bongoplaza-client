@@ -7,6 +7,6 @@ export const addProduct = async(product: {sellerId: string, sellerName: string, 
   return serverMutation('/api/products', "POST", product)
 }
 
-export const deleteProduct = async(productId)=>{
+export const deleteProduct = async(productId: string)=>{
   return serverMutation(`/api/products/${productId}`, 'DELETE')
 }

@@ -1,9 +1,14 @@
-import { requireRole } from '@/lib/core/session/getSession';
-import React from 'react';
+import { requireRole } from "@/lib/core/session/getSession";
+import { ReactNode } from "react";
 
-const SellerLayout = async({children}) => {
-    await requireRole('seller')
-    return children
+interface SellerLayoutProps {
+  children: ReactNode;
+}
+
+const SellerLayout = async ({ children }: SellerLayoutProps) => {
+  await requireRole("seller");
+
+  return <>{children}</>;
 };
 
 export default SellerLayout;

@@ -12,42 +12,38 @@ import {
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
+import toast from "react-hot-toast";
 import { BiCheck } from "react-icons/bi";
 import { BsGoogle } from "react-icons/bs";
 
 const LoginPage = () => {
-    const router = useRouter()
-  const onSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
+  const router = useRouter();
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
-    const formData = Object.fromEntries(form.entries());
+    const email = form.get("email") as string;
+    const password = form.get("password") as string;
+    const { data, error } = await authClient.signIn.email({
+      email,
+      password,
+      callbackURL: "/",
+    });
 
-    const {email,password} = formData
-    const {data, error} = await authClient.signIn.email({
-        email,
-        password,
-        callbackURL: '/'
-
-    })
-
-    if(data){
-        alert('login success')
+    if (data) {
+      toast.success("login success");
     }
 
-    if(error){
-        alert(error.message)
-        console.log(error.message);
+    if (error) {
+      alert(error.message);
+      console.log(error.message);
     }
-
-
-
   };
 
-  const handleGoogleLogin = async()=>{
+  const handleGoogleLogin = async () => {
     await authClient.signIn.social({
-      provider: 'google'
-    })
-  }
+      provider: "google",
+    });
+  };
   return (
     <div className="min-h-[500px] container flex items-center justify-center">
       <Form
@@ -101,7 +97,11 @@ const LoginPage = () => {
           </Button>
         </div>
         <div>
-          <Button className="w-full" variant="tertiary" onClick={handleGoogleLogin}>
+          <Button
+            className="w-full"
+            variant="tertiary"
+            onClick={handleGoogleLogin}
+          >
             <BsGoogle />
             Sign in with Google
           </Button>

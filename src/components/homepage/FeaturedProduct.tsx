@@ -3,10 +3,11 @@ import Link from 'next/link';
 import React from 'react';
 import { BiChevronRight } from 'react-icons/bi';
 import ProductCard from '../shop/ProductCard';
+import { Product } from '@/app/shop/page';
 
 const FeaturedProduct = async() => {
     const res = await getProducts()
-    const products = res.products
+    const products: Product[] = res.products
     return (
          <section className="py-20">
         <div className="container">

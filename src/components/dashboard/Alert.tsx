@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { BiTrash } from "react-icons/bi";
 
-const AlertConfirm =({product})=> {
+const AlertConfirm =({product}: {product: any})=> {
   const router = useRouter()
   const productId = product._id
 

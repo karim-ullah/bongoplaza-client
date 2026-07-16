@@ -4,7 +4,28 @@ import { getProducts } from "@/lib/api/product";
 import ProductCard from "@/components/shop/ProductCard";
 import PaginationPart from "../../components/shop/PaginationPart";
 
-const ShopPage = async({searchParams}) => {
+interface ShopPageProps {
+  searchParams: Promise<{
+    search?: string;
+    category?: string;
+    sortBy?: string;
+    page?: string;
+  }>;
+}
+
+
+export interface Product {
+  _id: string;
+  sellerId: string;
+  sellerName: string;
+  title: string;
+  price: number;
+  imageUrl: string;
+  category: string;
+  description: string;
+}
+
+const ShopPage = async({searchParams}: ShopPageProps) => {
     const sParams = await searchParams;
       const search = sParams.search || "";
       const category = sParams.category || "";
@@ -25,7 +46,7 @@ const ShopPage = async({searchParams}) => {
         params.set("page", page);
       }
       const res = await getProducts(params)
-      const products = res.products
+      const products: Product[] = res.products
   return (
     <div className="container py-10">
       <div>

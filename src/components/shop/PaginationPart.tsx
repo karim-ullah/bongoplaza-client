@@ -2,7 +2,9 @@
 import { Table,Pagination } from "@heroui/react";
 import Link from "next/link";
 
-const PaginationPart = ({data}) => {
+
+
+const PaginationPart = ({data}: {data: any}) => {
   const page = data.page
   const pages = []
   const totalPages = data.totalPage
@@ -15,9 +17,7 @@ const PaginationPart = ({data}) => {
     <div>
       <Table.Footer>
         <Pagination size="sm">
-          <Pagination.Summary>
-            {/* {start} to {end} of {users.length} results */}
-          </Pagination.Summary>
+          
           <Pagination.Content>
             <Pagination.Item>
               <Pagination.Previous
@@ -35,7 +35,8 @@ const PaginationPart = ({data}) => {
 
                 <Link href={`/shop?page=${p}`}>
                 <Pagination.Link isActive={p === page}
-                 onPress={() => setPage(p)}>
+                //  onPress={() => setPage(p)}
+                 >
                   {p}
                 </Pagination.Link>
                 </Link>

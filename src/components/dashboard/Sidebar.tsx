@@ -7,13 +7,14 @@ import React from "react";
 import toast from "react-hot-toast";
 import { FiUser } from "react-icons/fi";
 import { LuBox, LuSettings } from "react-icons/lu";
+import type { ComponentType, SVGProps } from "react";
 
 const Sidebar = () => {
   const { data: session } = authClient.useSession();
   const user = session?.user;
 
   const path = usePathname();
-  const router = useRouter()
+  const router = useRouter();
   // console.log(user);
 
   const buyer: {
@@ -54,15 +55,20 @@ const Sidebar = () => {
     { icon: FiUser, label: "Profile", href: "/dashboard/admin/profile" },
   ];
 
+  const handleLogOut = async () => {
+    await authClient.signOut();
+    toast.success("Log out successful");
+    router.push("/");
+  };
 
-  const handleLogOut = async()=>{
-    await authClient.signOut()
-    toast.success('Log out successful')
-    router.push('/')
-  }
+  const role = (user as any)?.role;
 
-  const navItems =
-    user?.role === "buyer" ? buyer : user?.role === "seller" ? seller : admin;
+const navItems =
+  role === "buyer"
+    ? buyer
+    : role === "seller"
+    ? seller
+    : admin;
   return (
     <div className="w-full md:w-56 border-r md:border-r md:border-slate-500">
       <div className="py-10 flex flex-col justify-between gap-10">
@@ -73,14 +79,17 @@ const Sidebar = () => {
           <div className="flex items-center gap-3">
             <div>
               <Avatar className="rounded-lg">
-                <Avatar.Image alt="Square Avatar" src={user?.image} />
+                {user?.image && (
+                  <Avatar.Image alt="Square Avatar" src={user.image} />
+                )}
+
                 <Avatar.Fallback className="rounded-lg">SQ</Avatar.Fallback>
               </Avatar>
             </div>
             <div>
               <h2 className="text-xl font-exo2 font-bold">{user?.name}</h2>
               <span className="text-sm font-mono text-slate-400 -mt-3">
-                {user?.role}
+                {(user as any)?.role}
               </span>
             </div>
           </div>
@@ -101,7 +110,9 @@ const Sidebar = () => {
         </div>
 
         <div className="pr-3">
-          <Button fullWidth onClick={handleLogOut}>Log Out</Button>
+          <Button fullWidth onClick={handleLogOut}>
+            Log Out
+          </Button>
         </div>
       </div>
     </div>

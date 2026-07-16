@@ -4,7 +4,9 @@ import { BiTrash } from 'react-icons/bi';
 import { FaEye } from 'react-icons/fa';
 import AlertConfirm from './Alert';
 
-const AddedProductCard = ({product}) => {
+
+
+const AddedProductCard = ({product}: { product: any }) => {
     return (
         <div className='flex items-center justify-between bg-slate-800 border border-slate-400/60 p-5 rounded-2xl'>
 

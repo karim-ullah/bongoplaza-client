@@ -4,14 +4,13 @@
 :root {
   --background: #ffffff;
   --foreground: #070b12;
-  --accent: #6B7A99
+  --accent: #6b7a99;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-accent: var(--accent)
-  --font-exo2: var(--font-exo2), sans-serif;
+  --color-accent: var(--accent); --font-exo2: var(--font-exo2), sans-serif;
   --font-dmSans: var(--font-dm_sans), sans-serif;
 }
 
@@ -35,4 +34,3 @@ body {
     @apply bg-[#00D9F5] text-[#020810] font-semibold font-dmSans text-sm px-5 py-1 rounded-3xl;
   }
 }
-

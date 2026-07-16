@@ -1,12 +1,15 @@
 import Sidebar from "@/components/dashboard/Sidebar";
-import React from "react";
+import { ReactNode } from "react";
 
-const DashboardLayout = ({ children }) => {
+interface DashboardLayoutProps {
+  children: ReactNode;
+}
+
+const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   return (
     <div className="container flex flex-col md:flex-row min-h-screen gap-6">
       <Sidebar />
-
-      <main className="md:flex-1">{children}</main>
+      <main className="flex-1">{children}</main>
     </div>
   );
 };

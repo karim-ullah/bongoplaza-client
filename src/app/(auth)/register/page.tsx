@@ -20,13 +20,15 @@ const RegisterPage = () => {
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
-    const formData = Object.fromEntries(form.entries());
+    const name = form.get("name") as string;
+    const email = form.get("email") as string;
+    const password = form.get("password") as string;
+    const imageFile = form.get("image")
 
-    const imageFile = formData.image;
     const imageUrl = await uploadImage(imageFile);
 
     // console.log(imageUrl);
-    const { name, email, password } = formData;
+
     const { data, error } = await authClient.signUp.email({
       name,
       email,
@@ -86,7 +88,6 @@ const RegisterPage = () => {
             accept="image/*"
             required
             className="w-full rounded-lg border border-default-300 px-3 py-2"
-           
           />
           <FieldError />
         </TextField>

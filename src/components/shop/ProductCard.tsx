@@ -4,7 +4,7 @@ import Link from "next/link";
 import React from "react";
 import { CiStar } from "react-icons/ci";
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product }: {product: any}) => {
   return (
     <div className="bg-slate-900 border border-slate-500 rounded-2xl">
       <Link href={`/shop/${product._id}`} className="cursor-pointer">
@@ -41,7 +41,7 @@ const ProductCard = ({ product }) => {
             ${product.price}
           </span>
         </div>
-        <Button>Add to cart</Button>
+        <Button><Link href={`/shop/${product._id}`}>View Details</Link></Button>
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 'use client'
 import React, { useState } from 'react';
+import { BiCheck } from 'react-icons/bi';
 
 const NewsLetter = () => {
     const [email, setEmail] = useState<string>("");
@@ -16,7 +17,7 @@ const NewsLetter = () => {
             <p className="text-muted-foreground max-w-md mx-auto">Join 2 million subscribers. No spam — just signal.</p>
             {subscribed ? (
               <div className="flex items-center justify-center gap-2 px-6 py-4 bg-emerald-500/10 border border-emerald-500/20 rounded-xl text-emerald-400 max-w-sm mx-auto">
-                <Check className="w-5 h-5" />
+                <BiCheck className="w-5 h-5" />
                 <span className="font-semibold">You&apos;re in! Welcome to VORTEX.</span>
               </div>
             ) : (

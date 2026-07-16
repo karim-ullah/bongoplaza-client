@@ -1,8 +1,11 @@
 
 import React from 'react';
 import AddedProductCard from './AddedProductCard';
-
-const AddedProduct = ({products}) => {
+import { Product } from '@/app/shop/page';
+interface AddedProductProps {
+  products: Product[];
+}
+const AddedProduct = ({products}: AddedProductProps) => {
    
     return (
         <div>

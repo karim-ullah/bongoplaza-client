@@ -91,19 +91,19 @@ const Navbar = () => {
           {/* <IoIosSearch className="cursor-pointer" size={16} /> */}
 
           {user && (
-            <Link href={`/dashboard/${user?.role}/overview`}>
+            <Link href={`/dashboard/${(user as any)?.role}/overview`}>
               
               <FiUser className="cursor-pointer" size={16} />
             </Link>
           )}
           <FiShoppingCart className="cursor-pointer" size={16} />
           {user ? (
-            <Link href={`/dashboard/${user?.role}/overview`}>
+            <Link href={`/dashboard/${(user as any)?.role}/overview`}>
             <div className="relative">
               <Avatar className="size-8">
                 <Avatar.Image
                   alt="Online User"
-                  src={user?.image}
+                  src={(user as any)?.image}
                 />
                 <Avatar.Fallback>ON</Avatar.Fallback>
               </Avatar>

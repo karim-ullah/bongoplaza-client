@@ -7,7 +7,13 @@ import { CiStar } from "react-icons/ci";
 import { FaTruck } from "react-icons/fa";
 import { FiRefreshCw, FiShoppingCart } from "react-icons/fi";
 
-const DetailsPage = async({params}) => {
+interface DetailsPageProps {
+  params: {
+    id: string;
+  };
+}
+
+const DetailsPage = async({params} : DetailsPageProps) => {
     const {id} = await params
     const response = await getSingleProduct(id)
     const product = response
@@ -44,13 +50,7 @@ const DetailsPage = async({params}) => {
               alt={product.name}
               className="w-full h-full object-cover"
             />
-            {product.badge && (
-              <div
-                className={`absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold ${BADGE_CLASSES[product.badgeVariant!]}`}
-              >
-                {product.badge}
-              </div>
-            )}
+            
             {/* {!product.inStock && (
               <div className="absolute inset-0 bg-background/70 flex items-center justify-center">
                 <span className="px-4 py-2 bg-card border border-border rounded-xl text-sm font-semibold text-muted-foreground">
@@ -118,16 +118,7 @@ const DetailsPage = async({params}) => {
               ${product.price}
             </span>
 
-            {product.originalPrice && (
-              <>
-                <span className="text-xl text-muted-foreground line-through font-mono">
-                  ${product.originalPrice}
-                </span>
-                <span className="px-2.5 py-1 bg-rose-500/15 text-rose-400 text-xs font-bold rounded-full border border-rose-500/20">
-                  Save ${savings}
-                </span>
-              </>
-            )}
+           
           </div>
 
           <p className="text-muted-foreground leading-relaxed">
