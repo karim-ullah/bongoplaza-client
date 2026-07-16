@@ -1,10 +1,18 @@
-import { auth } from "@/lib/auth"
-import { headers } from "next/headers"
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 
-export const getUser = async()=>{
-const session = await auth.api.getSession({
-    headers: await headers()
-})
+export const getUser = async () => {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
 
-return session?.user
-}
+  return session?.user || null;
+};
+
+export const requireRole = async (role) => {
+  const user = await getUser();
+  if (user.role !== role) {
+    return redirect("/unauthorized");
+  }
+};

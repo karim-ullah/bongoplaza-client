@@ -4,6 +4,7 @@ const page = () => {
     return (
         <div>
             this is buyer page
+            
         </div>
     );
 };

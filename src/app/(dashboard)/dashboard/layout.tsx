@@ -3,10 +3,10 @@ import React from "react";
 
 const DashboardLayout = ({ children }) => {
   return (
-    <div className="container flex min-h-screen gap-6">
+    <div className="container flex flex-col md:flex-row min-h-screen gap-6">
       <Sidebar />
 
-      <main className="flex-1">{children}</main>
+      <main className="md:flex-1">{children}</main>
     </div>
   );
 };

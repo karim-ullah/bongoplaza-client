@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { DM_Sans, Exo_2} from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/shared/Navbar";
+import { Toaster } from "react-hot-toast";
+import Footer from "@/components/shared/Footer";
 
 
 
@@ -34,7 +36,9 @@ export default function RootLayout({
       <body className="flex flex-col">
         <Navbar/>
         {children}
+        <Footer/>
         
+        <Toaster />
         </body>
     </html>
   );

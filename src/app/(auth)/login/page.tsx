@@ -42,6 +42,12 @@ const LoginPage = () => {
 
 
   };
+
+  const handleGoogleLogin = async()=>{
+    await authClient.signIn.social({
+      provider: 'google'
+    })
+  }
   return (
     <div className="min-h-[500px] container flex items-center justify-center">
       <Form
@@ -95,7 +101,7 @@ const LoginPage = () => {
           </Button>
         </div>
         <div>
-          <Button className="w-full" variant="tertiary">
+          <Button className="w-full" variant="tertiary" onClick={handleGoogleLogin}>
             <BsGoogle />
             Sign in with Google
           </Button>

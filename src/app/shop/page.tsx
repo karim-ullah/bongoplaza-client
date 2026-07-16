@@ -1,10 +1,8 @@
-import { Button } from "@heroui/react";
-import Image from "next/image";
-import React from "react";
-import { CiStar } from "react-icons/ci";
+
 import SearchFilterPanel from "../../components/shop/SeachFilterPanel";
 import { getProducts } from "@/lib/api/product";
 import ProductCard from "@/components/shop/ProductCard";
+import PaginationPart from "../../components/shop/PaginationPart";
 
 const ShopPage = async({searchParams}) => {
     const sParams = await searchParams;
@@ -44,6 +42,10 @@ const ShopPage = async({searchParams}) => {
         {products && (
           products.map(product => <ProductCard key={product._id} product = {product}/>)
         )}
+      </div>
+
+      <div className="mt-6">
+        <PaginationPart data={res}/>
       </div>
     </div>
   );

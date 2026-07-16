@@ -2,6 +2,7 @@
 import { authClient } from "@/lib/auth-client";
 import { Avatar, Button } from "@heroui/react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { FiShoppingCart, FiUser } from "react-icons/fi";
 import { IoIosSearch } from "react-icons/io";
@@ -10,6 +11,8 @@ type LinkType = {
   label: string;
 };
 const Navbar = () => {
+  const path = usePathname()
+  // console.log(path);
   const { data: session } = authClient.useSession();
   const user = session?.user;
   // console.log(user);
@@ -19,8 +22,7 @@ const Navbar = () => {
     { href: "/", label: "Home" },
     { href: "/shop", label: "Shop" },
     { href: "/deals", label: "Deals" },
-    { href: "/brand", label: "Brand" },
-    { href: "/support", label: "Support" },
+    { href: "/contact", label: "Contact" },
     { href: "/about", label: "About" },
   ];
 
@@ -29,7 +31,7 @@ const Navbar = () => {
       {links.map((link, index) => (
         <li key={index}>
           <Link
-            className="font-dmSans text-sm font-normal text-[#6B7A99]"
+            className={`font-dmSans text-sm font-normal text-[#6B7A99] hover:text-slate-300 ${path === link.href ? 'text-slate-300' : ''}`}
             href={link.href}
           >
             {link.label}
@@ -96,6 +98,7 @@ const Navbar = () => {
           )}
           <FiShoppingCart className="cursor-pointer" size={16} />
           {user ? (
+            <Link href={`/dashboard/${user?.role}/overview`}>
             <div className="relative">
               <Avatar className="size-8">
                 <Avatar.Image
@@ -106,6 +109,7 @@ const Navbar = () => {
               </Avatar>
               <span className="absolute right-0 bottom-0 size-2 rounded-full bg-green-500 ring-2 ring-background" />
             </div>
+            </Link>
           ) : (
             <Link href={'/login'}>
               <Button>Sign In</Button>

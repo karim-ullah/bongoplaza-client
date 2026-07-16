@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Description,
@@ -15,8 +15,17 @@ import {
 import { uploadImage } from "@/lib/uploadImage";
 import { addProduct } from "@/lib/core/actions/action";
 import { authClient } from "@/lib/auth-client";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
+import AddedProduct from "@/components/dashboard/AddedProduct";
+import { getSellerProduct } from "@/lib/api/product";
 
 const AddProduct = () => {
+
+  const [open, setOpen] = useState(false)
+  const [products, setProducts] = useState([])
+
+  const router = useRouter()
 
   const {data:session} = authClient.useSession()
   const user = session?.user
@@ -46,16 +55,41 @@ const AddProduct = () => {
         price,
         description
     })
-    console.log(res);
+    if(res.insertedId){
+      toast.success('added successful')
+      router.refresh()
+      router.push('/dashboard/seller/add-product')
+      setOpen(false)
+    }
   };
+
+  useEffect(()=>{
+    const getSellerProducts = async()=>{
+      const res = await getSellerProduct(sellerId)
+      setProducts(res)
+
+    }
+
+    getSellerProducts()
+  }, [sellerId, setProducts])
+
   return (
     <div className="py-10 px-4">
-      <Form className="min-w-4xl" onSubmit={onSubmit}>
+
+      <Button onClick={()=> setOpen(!open)}>Add Product</Button>
+
+      {open && (
+
+      <Form className="w-full md:min-w-4xl mt-6" onSubmit={onSubmit}>
         <Fieldset>
           <Fieldset.Legend className="text-2xl">Add Product</Fieldset.Legend>
           <Description>Add your product information.</Description>
-          <FieldGroup className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <FieldGroup >
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
             <TextField
+            fullWidth
               isRequired
               name="title"
               validate={(value) => {
@@ -70,6 +104,7 @@ const AddProduct = () => {
               <FieldError />
             </TextField>
             <TextField isRequired name="image">
+
                       <Label>Product Image</Label>
                       <input
                         id="image"
@@ -103,6 +138,7 @@ const AddProduct = () => {
               <Description>Minimum 10 characters</Description>
               <FieldError />
             </TextField>
+            </div>
           </FieldGroup>
           <Fieldset.Actions>
             <Button type="submit">Add Product</Button>
@@ -110,6 +146,14 @@ const AddProduct = () => {
           </Fieldset.Actions>
         </Fieldset>
       </Form>
+      )}
+
+
+
+      <div>
+        <AddedProduct products={products}/>
+      </div>
+
     </div>
   );
 };
